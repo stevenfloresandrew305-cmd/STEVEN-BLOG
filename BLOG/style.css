@@ -6,22 +6,24 @@
 }
 
 :root {
-    --accent: #f0a500;
-    --accent-dark: #d18f00;
-    --bg-main: #121212;
-    --bg-section: #1a1a1a;
-    --bg-card: #222222;
-    --bg-elevated: #2a2a2a;
-    --text-main: #e8e8e8;
-    --text-muted: #9a9a9a;
-    --border: #333333;
-    --shadow-sm: 0 5px 25px rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 12px 30px rgba(0, 0, 0, 0.6);
-    --radius: 15px;
+    --accent: #10b981;
+    --accent-hover: #34d399;
+    --accent-glow: rgba(16, 185, 129, 0.4);
+    --bg-main: #0a0a0a;
+    --bg-section: #121212;
+    --bg-card: #1a1a1a;
+    --bg-elevated: #222222;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --border: #2a2a2a;
+    --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.5);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.8);
+    --shadow-glow: 0 0 20px var(--accent-glow);
+    --radius: 16px;
 }
 
 body {
-    font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
     background-color: var(--bg-main);
     color: var(--text-main);
     line-height: 1.7;
@@ -36,7 +38,7 @@ a {
 img {
     display: block;
     width: 100%;
-    object-fit: cover; /* Pinipigilan ang pag-stretch ng image */
+    object-fit: cover;
 }
 
 section {
@@ -44,16 +46,18 @@ section {
 }
 
 .section {
-    padding: 90px 8%;
+    padding: 100px 8%;
 }
 
 header {
-    background-color: rgba(18, 18, 18, 0.95);
-    backdrop-filter: blur(10px);
+    background-color: rgba(10, 10, 10, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
     position: sticky;
     top: 0;
     z-index: 100;
+    transition: all 0.3s ease;
 }
 
 .navbar {
@@ -68,14 +72,25 @@ header {
 
 .logo {
     font-size: 28px;
-    font-weight: bold;
+    font-weight: 800;
     color: var(--text-main);
-    white-space: nowrap;
     letter-spacing: -0.5px;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
 }
 
 .logo span {
     color: var(--accent);
+    text-shadow: var(--shadow-glow);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.logo:hover span {
+    color: var(--accent-hover);
+    text-shadow: 0 0 30px var(--accent-hover);
 }
 
 .nav-links {
@@ -89,9 +104,9 @@ header {
     font-size: 14px;
     font-weight: 600;
     color: var(--text-muted);
-    transition: color 0.3s ease;
     position: relative;
     padding-bottom: 4px;
+    transition: color 0.4s ease; /* Dito nagbabago ang kulay */
 }
 
 .nav-links a::after {
@@ -102,26 +117,28 @@ header {
     width: 0;
     height: 2px;
     background-color: var(--accent);
-    transition: width 0.3s ease;
+    transition: width 0.4s ease, background-color 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 0 0 transparent;
 }
 
 .nav-links a:hover {
-    color: var(--accent);
+    color: var(--accent-hover);
 }
 
 .nav-links a:hover::after {
     width: 100%;
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 10px var(--accent-hover);
 }
 
-/* HERO SECTION */
 .hero {
-    min-height: 100vh; /* Sinisiguro na sakop ang buong screen */
+    min-height: 100vh;
     padding: 80px 8%;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 60px;
-    background: linear-gradient(135deg, #121212, #1c1c1c);
+    background: radial-gradient(circle at 10% 20%, #1a1a1a 0%, #0a0a0a 100%);
 }
 
 .hero-content {
@@ -132,16 +149,24 @@ header {
 .welcome,
 .subtitle {
     color: var(--accent);
-    font-size: 12px;
-    font-weight: bold;
-    letter-spacing: 3px;
-    margin-bottom: 12px;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+    text-shadow: var(--shadow-glow);
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+}
+
+.welcome:hover,
+.subtitle:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 30px var(--accent-hover);
 }
 
 .hero h1 {
-    font-size: clamp(38px, 5vw, 62px);
-    line-height: 1.2;
-    margin-bottom: 15px;
+    font-size: clamp(38px, 5vw, 65px);
+    line-height: 1.1;
+    margin-bottom: 20px;
     letter-spacing: -1px;
     color: var(--text-main);
 }
@@ -149,11 +174,19 @@ header {
 .hero h1 span,
 .section-heading h2 span {
     color: var(--accent);
+    text-shadow: var(--shadow-glow);
+    transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.hero h1 span:hover,
+.section-heading h2 span:hover {
+    color: var(--accent-hover);
+    text-shadow: 0 0 30px var(--accent-hover);
 }
 
 .hero h2 {
     font-size: 22px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     color: var(--text-muted);
     font-weight: 500;
 }
@@ -161,26 +194,27 @@ header {
 .hero-content > p:not(.welcome) {
     color: var(--text-muted);
     max-width: 520px;
-    margin-bottom: 28px;
+    margin-bottom: 35px;
     font-size: 16px;
 }
 
 .btn {
     display: inline-block;
     background-color: var(--accent);
-    color: #121212;
-    padding: 14px 30px;
+    color: #0a0a0a;
+    padding: 15px 35px;
     border-radius: 10px;
     font-weight: bold;
-    font-size: 15px;
-    transition: all 0.3s ease;
-    box-shadow: 0 6px 20px rgba(240, 165, 0, 0.25);
+    font-size: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px var(--accent-glow);
 }
 
 .btn:hover {
-    background-color: var(--accent-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(240, 165, 0, 0.4);
+    background-color: var(--accent-hover);
+    color: #000000;
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 30px var(--accent-glow), 0 0 20px var(--accent-hover);
 }
 
 .hero-image {
@@ -189,27 +223,27 @@ header {
     max-width: 480px;
 }
 
-/* FIX: Aspect Ratio para hindi mag-deform */
 .hero-image img {
     width: 100%;
-    aspect-ratio: 4 / 3; /* Pantay na hugis parati */
+    aspect-ratio: 4 / 3;
     border-radius: 25px;
-    box-shadow: 15px 15px 0 #2a2a2a;
-    transition: transform 0.4s ease;
+    box-shadow: 15px 15px 0 rgba(16, 185, 129, 0.1);
+    transition: all 0.5s ease;
 }
 
 .hero-image img:hover {
     transform: translate(-5px, -5px);
+    box-shadow: 20px 20px 0 var(--accent-glow);
 }
 
 .section-heading {
     text-align: center;
     max-width: 700px;
-    margin: 0 auto 55px;
+    margin: 0 auto 60px;
 }
 
 .section-heading h2 {
-    font-size: 38px;
+    font-size: 40px;
     line-height: 1.3;
     margin-bottom: 15px;
     letter-spacing: -0.5px;
@@ -221,7 +255,6 @@ header {
     font-size: 16px;
 }
 
-/* ABOUT SECTION */
 .about {
     background-color: var(--bg-main);
 }
@@ -239,17 +272,17 @@ header {
     width: 100%;
 }
 
-/* FIX: Aspect Ratio para sa About Image */
 .about-image img {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Perfect Square palagi */
+    aspect-ratio: 1 / 1;
     border-radius: 20px;
-    box-shadow: 10px 10px 0 #2a2a2a;
-    transition: transform 0.4s ease;
+    box-shadow: 10px 10px 0 rgba(16, 185, 129, 0.1);
+    transition: all 0.5s ease;
 }
 
 .about-image img:hover {
-    transform: translate(-4px, -4px);
+    transform: translate(-5px, -5px);
+    box-shadow: 15px 15px 0 var(--accent-glow);
 }
 
 .about-text {
@@ -257,10 +290,15 @@ header {
 }
 
 .about-text h3 {
-    font-size: 27px;
-    margin-bottom: 18px;
+    font-size: 28px;
+    margin-bottom: 20px;
     letter-spacing: -0.3px;
     color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.about-text h3:hover {
+    color: var(--accent);
 }
 
 .about-text > p {
@@ -269,15 +307,22 @@ header {
 }
 
 .personal-info {
-    margin-top: 22px;
-    padding: 22px;
+    margin-top: 25px;
+    padding: 25px;
     background-color: var(--bg-elevated);
     border-radius: 12px;
     border-left: 4px solid var(--accent);
+    transition: all 0.4s ease;
+}
+
+.personal-info:hover {
+    transform: translateX(8px);
+    border-left-color: var(--accent-hover);
+    box-shadow: -4px 0 20px var(--accent-glow);
 }
 
 .personal-info p {
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     font-size: 15px;
     color: var(--text-main);
 }
@@ -288,9 +333,13 @@ header {
 
 .personal-info strong {
     color: var(--accent);
+    transition: color 0.3s ease;
 }
 
-/* FRIENDS SECTION */
+.personal-info:hover strong {
+    color: var(--accent-hover);
+}
+
 .friends {
     background-color: var(--bg-section);
 }
@@ -299,8 +348,8 @@ header {
     max-width: 1100px;
     margin: auto;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Auto adjust cards */
-    gap: 28px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
 }
 
 .friend-card {
@@ -309,36 +358,41 @@ header {
     border-radius: var(--radius);
     overflow: hidden;
     box-shadow: var(--shadow-sm);
-    transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+    transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .friend-card:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-md);
-    border-color: var(--accent);
+    transform: translateY(-12px);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
+    border-color: var(--accent-hover);
 }
 
-/* FIX: Aspect Ratio para sa Friend Cards */
 .friend-card img {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Square parati kahit anong device */
+    aspect-ratio: 1 / 1;
     object-position: center;
-    transition: transform 0.5s ease;
+    transition: transform 0.6s ease;
 }
 
 .friend-card:hover img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .card-content {
-    padding: 24px;
+    padding: 25px;
 }
 
 .card-content h3 {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 10px;
     letter-spacing: -0.3px;
     color: var(--text-main);
+    transition: color 0.4s ease;
+}
+
+.friend-card:hover .card-content h3 {
+    color: var(--accent-hover);
+    text-shadow: 0 0 15px var(--accent-glow);
 }
 
 .card-content p {
@@ -346,7 +400,6 @@ header {
     font-size: 14px;
 }
 
-/* MEMORIES SECTION */
 .memories {
     background-color: var(--bg-main);
 }
@@ -356,17 +409,23 @@ header {
     margin: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 25px;
+    gap: 30px;
 }
 
 .memory-item {
     position: relative;
     width: 100%;
-    aspect-ratio: 16 / 9; /* Widescreen ratio para sa memories */
+    aspect-ratio: 16 / 9;
     border-radius: var(--radius);
     overflow: hidden;
     background-color: #000000;
     cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease;
+}
+
+.memory-item:hover {
+    box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 .memory-item img {
@@ -375,11 +434,11 @@ header {
     left: 0;
     width: 100%;
     height: 100%;
-    transition: transform 0.5s ease;
+    transition: transform 0.7s ease;
 }
 
 .memory-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.15);
 }
 
 .memory-caption {
@@ -387,11 +446,11 @@ header {
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 45px 20px 20px;
+    padding: 60px 25px 25px;
     color: white;
-    background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, transparent 100%);
     transform: translateY(10px);
-    transition: transform 0.35s ease;
+    transition: transform 0.4s ease;
     z-index: 2;
 }
 
@@ -400,17 +459,22 @@ header {
 }
 
 .memory-caption h3 {
-    font-size: 20px;
-    margin-bottom: 4px;
+    font-size: 22px;
+    margin-bottom: 5px;
     color: var(--accent);
+    text-shadow: var(--shadow-glow);
+    transition: color 0.3s ease;
+}
+
+.memory-item:hover .memory-caption h3 {
+    color: var(--accent-hover);
 }
 
 .memory-caption p {
-    font-size: 13px;
+    font-size: 14px;
     opacity: 0.9;
 }
 
-/* CONTACT SECTION */
 .contact {
     background-color: var(--bg-section);
 }
@@ -418,69 +482,82 @@ header {
 .contact-box {
     max-width: 700px;
     margin: auto;
-    padding: 45px;
+    padding: 50px;
     text-align: center;
     background-color: var(--bg-card);
     border: 1px solid var(--border);
-    border-radius: 18px;
+    border-radius: 20px;
     box-shadow: var(--shadow-sm);
+    transition: all 0.4s ease;
+}
+
+.contact-box:hover {
+    border-color: var(--accent);
+    box-shadow: var(--shadow-md), var(--shadow-glow);
 }
 
 .contact-box h3 {
-    font-size: 25px;
-    margin-bottom: 12px;
+    font-size: 26px;
+    margin-bottom: 15px;
     letter-spacing: -0.3px;
     color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.contact-box:hover h3 {
+    color: var(--accent-hover);
 }
 
 .contact-box > p {
     color: var(--text-muted);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
 .social-links {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 12px;
+    gap: 15px;
 }
 
 .social-links a {
     display: inline-block;
-    background-color: var(--accent);
-    color: #121212;
-    padding: 11px 22px;
-    border-radius: 8px;
-    font-size: 14px;
+    background-color: var(--bg-elevated);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+    padding: 12px 25px;
+    border-radius: 10px;
+    font-size: 15px;
     font-weight: bold;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
 }
 
 .social-links a:hover {
-    background-color: var(--accent-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 18px rgba(240, 165, 0, 0.3);
+    background-color: var(--accent-hover);
+    color: #000000;
+    border-color: var(--accent-hover);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px var(--accent-glow);
 }
 
 footer {
-    background-color: #0a0a0a;
+    background-color: #050505;
     color: var(--text-muted);
     text-align: center;
-    padding: 30px 15px;
+    padding: 40px 15px;
     border-top: 1px solid var(--border);
 }
 
 footer p {
-    font-size: 13px;
-    margin-bottom: 4px;
+    font-size: 14px;
+    margin-bottom: 5px;
 }
 
 footer p:last-child {
     margin-bottom: 0;
-    opacity: 0.6;
+    opacity: 0.5;
 }
 
-/* RESPONSIVE DESIGN (Para sa Tablet at Mobile) */
 @media (max-width: 1024px) {
     .section {
         padding: 80px 6%;
@@ -499,20 +576,20 @@ footer p:last-child {
 @media (max-width: 900px) {
     .navbar {
         flex-direction: column;
-        gap: 14px;
-        padding: 16px 6%;
+        gap: 15px;
+        padding: 18px 6%;
     }
 
     .nav-links {
         justify-content: center;
         flex-wrap: wrap;
-        gap: 12px 22px;
+        gap: 15px 25px;
     }
 
     .hero {
-        flex-direction: column; /* Isasalalim ang image sa text */
+        flex-direction: column;
         text-align: center;
-        gap: 40px;
+        gap: 50px;
         padding: 60px 6%;
         min-height: auto;
     }
@@ -522,7 +599,7 @@ footer p:last-child {
     }
 
     .hero-image {
-        max-width: 90%; /* Hindi sasagad sa gilid */
+        max-width: 90%;
     }
 
     .hero-content > p:not(.welcome) {
@@ -531,8 +608,8 @@ footer p:last-child {
     }
 
     .about-content {
-        flex-direction: column; /* Isasalalim ang image sa text */
-        gap: 35px;
+        flex-direction: column;
+        gap: 40px;
     }
 
     .about-image {
@@ -547,7 +624,7 @@ footer p:last-child {
 
 @media (max-width: 600px) {
     section {
-        scroll-margin-top: 130px;
+        scroll-margin-top: 140px;
     }
 
     .section {
@@ -555,7 +632,7 @@ footer p:last-child {
     }
 
     .navbar {
-        padding: 14px 5%;
+        padding: 15px 5%;
     }
 
     .logo {
@@ -563,7 +640,7 @@ footer p:last-child {
     }
 
     .nav-links {
-        gap: 8px 16px;
+        gap: 10px 18px;
     }
 
     .nav-links a {
@@ -583,7 +660,7 @@ footer p:last-child {
     }
 
     .hero-image img {
-        box-shadow: 8px 8px 0 #2a2a2a; /* Paliit ng shadow sa mobile */
+        box-shadow: 8px 8px 0 rgba(16, 185, 129, 0.1);
     }
 
     .section-heading {
@@ -599,15 +676,15 @@ footer p:last-child {
     }
 
     .about-image img {
-        box-shadow: 6px 6px 0 #2a2a2a;
+        box-shadow: 6px 6px 0 rgba(16, 185, 129, 0.1);
     }
 
     .about-text h3 {
-        font-size: 23px;
+        font-size: 24px;
     }
 
     .contact-box {
-        padding: 32px 20px;
+        padding: 35px 20px;
     }
 
     .contact-box h3 {
@@ -617,11 +694,11 @@ footer p:last-child {
     .social-links a {
         flex: 1 1 auto;
         text-align: center;
-        min-width: 100px;
+        min-width: 120px;
     }
     
     .memory-item {
-        aspect-ratio: 4 / 3; /* Mas squared ang shape sa phone */
+        aspect-ratio: 4 / 3;
     }
 }
 
